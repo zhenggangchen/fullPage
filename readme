@@ -1,0 +1,67 @@
+通过CSS使div实现全屏效果
+全屏要素
+全屏的元素及其父元素都要设置height:100%
+将html、body标签设置height:100%
+（注：heigh:100%是随其父元素高度变化而变化的）
+
+闭包的作用
+(function($){
+//do somethig
+})(jQuery)
+
+闭包的作用
+1.避免全局依赖
+2.避免第三方破坏
+3.兼容jQuery操作符'$'和jQuery
+
+jQuery插件开发方式
+（一）类级别组件开发
+ 即给jQuery命名空间下添加新的全局函数，也称为静态方法
+ jQuery.myPlugin=function(){
+ //do something
+ }
+ 例如：$.Ajax()、$.extend()
+
+（一）对象级别组件开发
+即挂在jQuery原型下的方法，这样通过选择器获取的jQuery
+对象实例也能共享该方法，也称为动态方法
+
+$.fn.myPlugin=function(){
+//do something
+}
+$.fn===$.prototype
+例如：addClass()、attr()等，需要创建实例来调用
+
+
+链式调用
+$("div").next().addClass()...
+$.fn.myPlugin=function(){
+return this.each(function(){
+  //do something
+  });
+};
+代码说明
+-return this 返回当前对象，来维护插件的链式调用
+-each 循环实现每个元素的访问
+
+单例模式
+$.fn.myPlugin=function(){
+var me=$(this),
+ instance=me.data("myPlugin");
+ if(!instance){
+ me.data("myPlugin",(instance=new myPlugin()));
+ }
+};
+
+代码说明
+-如果实例存在则不再重新创建实例
+-利用data()来存放插件对象的实例
+
+
+
+jQuery的extend方法的作用:将用户自定义的插件参数于插件的默认参数加以合并
+
+
+
+
+
