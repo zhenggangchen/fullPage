@@ -1,3 +1,5 @@
+学做一个jQuery插件
+
 通过CSS使div实现全屏效果
 全屏要素
 全屏的元素及其父元素都要设置height:100%
@@ -61,7 +63,40 @@ var me=$(this),
 
 jQuery的extend方法的作用:将用户自定义的插件参数于插件的默认参数加以合并
 
+.on()
+语法：on(events[,selector][,data],handler(eventObject))
+描述：在选定的元素上绑定一个或多个事件处理函数
+1.events 一个或多空格分隔的事件类型，例如click keydown。
+2.selector 一个选择器字符，用于过滤出被选中的元素中能触发事件的后代元素，如果为null，那么被选中的元素总是能触发事件。
+3.data 事件触发时，要传递给处理函数的event.data。
+4.handler(eventObject)事件触发时，执行的函数。
 
+优点：
+委托事件不仅可以给未创建的后代元素绑定事件外，当需要监视很多元素的时候，委托事件的开销更小
+
+绑定鼠标滚轮事件
+JS事件有很多需要兼容的地方,鼠标滚轮事件显然也有额外的差异.
+包括IE6浏览器在内都适用mouseWheel,而只有火狐浏览器使用
+DOMMouseScroll。
+$(document).on("mouseWheel DOMMouseScroll",handler);
+
+任何判断鼠标滚轮方向
+1.其他浏览器通过wheeldalta属性来判断，但是火狐浏览器没有这个属性，但可以通过detail这个属性来判断
+2.开发中发现每次向下滚动时，wheeldalta都是-120，但是detail却是3，火狐浏览器方向判断的数值正负与其他浏览器是相反的
+
+绑定键盘事件keydown
+说明：keydown事件发生在键盘的键被按下的时候。
+原生js中判断按下了哪个键是存在兼容性问题的：
+1.IE 只有keyCode属性
+2.FireFox 中有which和charCode属性
+3.Opera 中有keyCode和which属性等
+
+但是jQuery解决了这个兼容问题。
+
+jQuery中通过.witch属性和.keyCode属性来确定按下了哪个键：
+
+transitionend
+说明：transitionend事件会在csstransition结束后触发。
 
 
 
